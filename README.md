@@ -185,7 +185,7 @@ Citations are always included in JSON output by default.
 
 #### Query with Inline Citations
 
-The `--add-citations` flag adds inline citation links directly into the response text.
+The `--add-citations` flag adds inline citations directly into the response text.
 
 ```bash
 gemini-google-search-tool query "Latest AI developments" --add-citations
@@ -194,7 +194,7 @@ gemini-google-search-tool query "Latest AI developments" --add-citations
 **Output:**
 ```json
 {
-  "response_text": "Recent AI developments include...[1](https://...), [2](https://...)",
+  "response_text": "Recent AI developments include... ([1], [2])",
   "citations": [
     {"index": 1, "uri": "https://...", "title": "Source Title"},
     {"index": 2, "uri": "https://...", "title": "Another Source"}
