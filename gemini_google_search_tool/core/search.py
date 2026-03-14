@@ -204,7 +204,8 @@ def add_inline_citations(
     """Add inline citations to response text.
 
     Processes grounding segments to insert citation links in the format
-    [1](uri1), [2](uri2) at appropriate positions in the text.
+    ([1], [2]) at appropriate positions in the text. The indices correspond to the full
+    citations below.
 
     Args:
         response_text: The original response text
@@ -233,17 +234,17 @@ def add_inline_citations(
         if not segment.chunk_indices:
             continue
 
-        # Create citation string like [1](link1), [2](link2)
+        # Create citation string like ([1], [2])
         citation_links = []
         for chunk_idx in segment.chunk_indices:
             # chunk_indices are 0-based, citation index is 1-based
             citation_idx = chunk_idx + 1
             uri = citation_uris.get(citation_idx)
             if uri:
-                citation_links.append(f"[{citation_idx}]({uri})")
+                citation_links.append(f"[{citation_idx}]")
 
         if citation_links:
-            citation_string = ", ".join(citation_links)
+            citation_string = " (" + ", ".join(citation_links) + ")"
             text = text[: segment.end_index] + citation_string + text[segment.end_index :]
 
     logger.debug("Inline citations added successfully")
